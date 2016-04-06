@@ -197,6 +197,10 @@ angular.module('lightspeedHosting', [])
 	}])
 
 
+
+
+
+
 	.directive('serverItem', function () {
 		return {
 
@@ -237,7 +241,67 @@ angular.module('lightspeedHosting', [])
 			}]
 
 		};
-	});
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.directive('activityItem', function () {
+		return {
+
+			restrict: 'E', // Any/All of A, E, C, or M for attribute, element, class, or comment respectively
+
+			scope: {
+				activity: '='
+			},
+
+			template: `
+
+				<div>
+					<h4 class="list-group-item-heading" ng-bind="activity.type"></h4>
+					<p class="list-group-item-text">
+						<span ng-bind="activity.server.name"></span>
+					</p>
+
+				</div>
+
+			`,
+
+
+			link: function (scope, element, attrs) {
+				element.addClass("list-group-item")
+			},
+
+			controller: ['$scope', function ($scope) {
+
+				$scope.getState = function () {
+					return config.states[$scope.server.state];
+				}
+
+			}]
+
+		};
+	})
 
 
 ;
