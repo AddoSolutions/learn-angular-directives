@@ -292,14 +292,6 @@ angular.module('lightspeedHosting', [])
 				element.addClass("list-group-item")
 			},
 
-			controller: ['$scope', function ($scope) {
-
-				$scope.getState = function () {
-					return config.states[$scope.server.state];
-				}
-
-			}]
-
 		};
 	})
 
