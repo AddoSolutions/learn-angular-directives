@@ -192,7 +192,14 @@ angular.module('lightspeedHosting', [])
 
 	.directive('serverItem', function() {
 		return {
-			template: "Hi! I am a server. Please hold while I crash",
+
+			restrict: 'E', // Any/All of A, E, C, or M for attribute, element, class, or comment respectively
+
+			scope: {
+				server: '='
+			},
+
+			template: "Hi! I am a server, and my name is <b>{{server.name}}</b>. Please hold while I crash",
 
 		};
 	});
