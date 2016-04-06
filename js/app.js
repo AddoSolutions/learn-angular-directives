@@ -1,114 +1,130 @@
 var servers = [{
 	"name": "Planned Financial",
 	"cpu": 2,
-	"ram": 25,
+	"disk": 25,
 	"ram": 5,
 	"uptime": "5 months, 1 week"
 },
 	{
 		"name": "Boilerplate: NodeJS",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "6 months"
+		"uptime": "6 months",
+		state: 1
+
 	},
 	{
 		"name": "nine-oh-seven",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "6 months"
+		"uptime": "6 months",
+		state: 0
 	},
 	{
 		"name": "Boilerplate: Magento",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "6 months"
+		"uptime": "6 months",
+		state: 2
 	},
 	{
 		"name": "Boilerplate: PHP (Nginx or Apache)",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "5 months, 2 weeks"
+		"uptime": "5 months, 2 weeks",
+		state: 3
 	},
 	{
 		"name": "MyPraize Local",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 5,
-		"uptime": "5 months"
+		"uptime": "5 months",
+		state: 1
 	},
 	{
 		"name": "DotCMS Local Disk",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "5 months"
+		"uptime": "5 months",
+		state: 1
 	},
 	{
 		"name": "Test Cirros",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "4 months, 3 weeks"
+		"uptime": "4 months, 3 weeks",
+		state: 1
 	},
 	{
 		"name": "LSH",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 5,
-		"uptime": "4 months"
+		"uptime": "4 months",
+		state: 1
 	},
 	{
 		"name": "Guild CPO",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 5,
-		"uptime": "4 months"
+		"uptime": "4 months",
+		state: 1
 	},
 	{
 		"name": "Nick Dev",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "3 months, 4 weeks"
+		"uptime": "3 months, 4 weeks",
+		state: 1
 	},
 	{
 		"name": "mdjd-dev",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 2,
-		"uptime": "3 months, 2 weeks"
+		"uptime": "3 months, 2 weeks",
+		state: 1
 	},
 	{
 		"name": "Nicks Slackbot",
 		"cpu": 2,
-		"ram": 5,
+		"disk": 5,
 		"ram": 2,
-		"uptime": "1 month, 3 weeks"
+		"uptime": "1 month, 3 weeks",
+		state: 1
 	},
 	{
 		"name": "MyPraize Cache Crawl",
 		"cpu": 4,
-		"ram": 50,
+		"disk": 50,
 		"ram": 8,
-		"uptime": "2 weeks, 1 day"
+		"uptime": "2 weeks, 1 day",
+		state: 1
 	},
 	{
 		"name": "Root Integration",
 		"cpu": 2,
-		"ram": 25,
+		"disk": 25,
 		"ram": 5,
-		"uptime": "2 weeks"
+		"uptime": "2 weeks",
+		state: 1
 	},
 	{
 		"name": "Microservices",
 		"cpu": 4,
-		"ram": 50,
+		"disk": 50,
 		"ram": 8,
-		"uptime": "1 week, 6 days"
+		"uptime": "1 week, 6 days",
+		state: 1
 	}];
 
 var activity = [
@@ -160,7 +176,13 @@ var activity = [
 ];
 var config = {
 	servers: servers,
-	activity: activity
+	activity: activity,
+	states:[
+		"Shutdown",
+		"Running",
+		"Paused",
+		"Error"
+	]
 }
 
 
@@ -199,7 +221,25 @@ angular.module('lightspeedHosting', [])
 				server: '='
 			},
 
-			template: "Hi! I am a server, and my name is <b>{{server.name}}</b>. Please hold while I crash",
+			template: `
+
+				<div>
+					<h4 class="list-group-item-heading" ng-bind="server.name"></h4>
+					<p class="list-group-item-text">
+						<span>CPUs: {{server.cpu}}</span>
+						<span>Disk Size: {{server.disk}}</span>
+						<span>RAM: {{server.ram}}</span>
+						<span>UpTime: {{server.uptime}}</span>
+					</p>
+
+				</div>
+
+			`,
+
+
+			link:function(scope, element, attrs) {
+				element.addClass("list-group-item")
+			},
 
 		};
 	});
