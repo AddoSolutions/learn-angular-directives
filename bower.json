@@ -1,0 +1,28 @@
+{
+  "name": "angular-directives",
+  "authors": [
+    "Nick Artman <nick@addosolutions.com>"
+  ],
+  "description": "",
+  "main": "serve.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.ethode.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.5.3"
+  }
+}
