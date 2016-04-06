@@ -1,10 +1,12 @@
-var servers = [{
-	"name": "Planned Financial",
-	"cpu": 2,
-	"disk": 25,
-	"ram": 5,
-	"uptime": "5 months, 1 week"
-},
+var servers = [
+	{
+		"name": "Planned Financial",
+		"cpu": 2,
+		"disk": 25,
+		"ram": 5,
+		"uptime": "5 months, 1 week",
+		state: 1
+	},
 	{
 		"name": "Boilerplate: NodeJS",
 		"cpu": 2,
@@ -129,55 +131,55 @@ var servers = [{
 
 var activity = [
 	{
-		type:"Restart",
+		type: "Restart",
 		date: new Date(),
-		server:servers[2]
+		server: servers[2]
 	},
 	{
-		type:"Shutdown",
+		type: "Shutdown",
 		date: new Date(),
-		server:servers[4]
+		server: servers[4]
 	},
 	{
-		type:"Cold Restart",
+		type: "Cold Restart",
 		date: new Date(),
-		server:servers[1]
+		server: servers[1]
 	},
 	{
-		type:"Create",
+		type: "Create",
 		date: new Date(),
-		server:servers[6]
+		server: servers[6]
 	},
 	{
-		type:"Why",
+		type: "Why",
 		date: new Date(),
-		server:servers[3]
+		server: servers[3]
 	},
 	{
-		type:"Are",
+		type: "Are",
 		date: new Date(),
-		server:servers[2]
+		server: servers[2]
 	},
 	{
-		type:"You Still",
+		type: "You Still",
 		date: new Date(),
-		server:servers[5]
+		server: servers[5]
 	},
 	{
-		type:"Reading",
+		type: "Reading",
 		date: new Date(),
-		server:servers[4]
+		server: servers[4]
 	},
 	{
-		type:"This",
+		type: "This",
 		date: new Date(),
-		server:servers[7]
+		server: servers[7]
 	},
 ];
 var config = {
 	servers: servers,
 	activity: activity,
-	states:[
+	states: [
 		"Shutdown",
 		"Running",
 		"Paused",
@@ -195,24 +197,7 @@ angular.module('lightspeedHosting', [])
 	}])
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	.directive('serverItem', function() {
+	.directive('serverItem', function () {
 		return {
 
 			restrict: 'E', // Any/All of A, E, C, or M for attribute, element, class, or comment respectively
@@ -224,6 +209,8 @@ angular.module('lightspeedHosting', [])
 			template: `
 
 				<div>
+					<div class="state" ng-bind="getState()"></div>
+
 					<h4 class="list-group-item-heading" ng-bind="server.name"></h4>
 					<p class="list-group-item-text">
 						<span>CPUs: {{server.cpu}}</span>
@@ -237,33 +224,20 @@ angular.module('lightspeedHosting', [])
 			`,
 
 
-			link:function(scope, element, attrs) {
+			link: function (scope, element, attrs) {
 				element.addClass("list-group-item")
 			},
 
+			controller: ['$scope', function ($scope) {
+
+				$scope.getState = function () {
+					return config.states[$scope.server.state];
+				}
+
+			}]
+
 		};
 	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ;
