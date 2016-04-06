@@ -69,8 +69,10 @@
 <div class="container" ng-controller="DashboardCtrl">
 
 	<h1>Servers</h1>
+	<div class="list-group">
+		<server-item server="server" ng-repeat="server in config.servers"></server-item>
+	</div>
 
-	<server-item server="config.servers[1]"></server-item>
 
 </div><!-- /.container -->
 
