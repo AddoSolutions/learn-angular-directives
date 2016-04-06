@@ -197,10 +197,6 @@ angular.module('lightspeedHosting', [])
 	}])
 
 
-
-
-
-
 	.directive('serverItem', function () {
 		return {
 
@@ -244,28 +240,6 @@ angular.module('lightspeedHosting', [])
 	})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	.directive('activityItem', function () {
 		return {
 
@@ -296,28 +270,6 @@ angular.module('lightspeedHosting', [])
 	})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	.directive('serverControl', function () {
 		return {
 
@@ -333,7 +285,38 @@ angular.module('lightspeedHosting', [])
 
 				<span class="holder" ng-transclude></span>
 
-			`
+				<div class="popover bottom">
+					<div class="arrow"></div>
+					<h3 class="popover-title">Control: {{server.name}}</h3>
+					<div class="popover-content">
+
+
+						<!-- Indicates a successful or positive action -->
+						<button type="button" ng-click="setState(1)" ng-show="server.state==0||server.state==3" class="btn btn-success">Start</button>
+
+						<!-- Contextual button for informational alert messages -->
+						<button type="button" ng-click="setState(1)" ng-show="server.state==2" class="btn btn-info">Resume</button>
+
+						<!-- Indicates caution should be taken with this action -->
+						<button type="button" ng-click="setState(2)" ng-show="server.state==1" class="btn btn-warning">Pause</button>
+
+						<!-- Indicates a dangerous or potentially negative action -->
+						<button type="button" ng-click="setState(0)"  ng-show="server.state==1" class="btn btn-danger">Stop</button>
+
+
+
+					</div>
+				</div>
+
+			`,
+
+			controller: ['$scope', function ($scope) {
+
+				$scope.setState = function (state) {
+					$scope.server.state=state;
+				}
+
+			}]
 
 		};
 	})
