@@ -191,11 +191,49 @@ var config = {
 angular.module('lightspeedHosting', [])
 
 
-	.controller('DashboardCtrl', ['$scope', function ($scope) {
-		$scope.name = "Nick";
-		$scope.config = config;
-	}])
 
+	.directive('app', function () {
+		return {
+
+			restrict: 'E', // Any/All of A, E, C, or M for attribute, element, class, or comment respectively
+
+			template: `
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h1>Servers</h1>
+			<div class="list-group">
+				<server-item server="server" ng-repeat="server in config.servers"></server-item>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h1>Activity</h1>
+
+			<div class="list-group">
+				<activity-item activity="activity" ng-repeat="activity in config.activity"></activity-item>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</div><!-- /.container -->
+
+			`,
+
+
+			controller: ['$scope', function ($scope) {
+
+				$scope.name = "Nick";
+				$scope.config = config;
+
+			}]
+
+		};
+	})
 
 	.directive('serverItem', function () {
 		return {
