@@ -169,7 +169,52 @@ angular.module('lightspeedHosting', [])
 
 	.controller('DashboardCtrl', ['$scope', function ($scope) {
 		$scope.name = "Nick";
+		$scope.config = config;
 	}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.directive('serverItem', function() {
+		return {
+			template: "Hi! I am a server. Please hold while I crash",
+
+		};
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
