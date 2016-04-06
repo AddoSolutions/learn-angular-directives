@@ -215,7 +215,7 @@ angular.module('lightspeedHosting', [])
 				<div>
 					<div class="state" ng-bind="getState()"></div>
 
-					<h4 class="list-group-item-heading" ng-bind="server.name"></h4>
+					<h4 class="list-group-item-heading" server-control="server">{{server.name}}</h4>
 					<p class="list-group-item-text">
 						<span>CPUs: {{server.cpu}}</span>
 						<span>Disk Size: {{server.disk}}</span>
@@ -280,7 +280,7 @@ angular.module('lightspeedHosting', [])
 				<div>
 					<h4 class="list-group-item-heading" ng-bind="activity.type"></h4>
 					<p class="list-group-item-text">
-						<span ng-bind="activity.server.name"></span>
+						<div server-control="activity.server">{{activity.server.name}}</div>
 					</p>
 
 				</div>
@@ -291,6 +291,49 @@ angular.module('lightspeedHosting', [])
 			link: function (scope, element, attrs) {
 				element.addClass("list-group-item")
 			},
+
+		};
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.directive('serverControl', function () {
+		return {
+
+			restrict: 'A', // Any/All of A, E, C, or M for attribute, element, class, or comment respectively
+
+			scope: {
+				server: '=serverControl'
+			},
+
+			transclude: true,
+
+			template: `
+
+				<span class="holder" ng-transclude></span>
+
+			`
 
 		};
 	})
